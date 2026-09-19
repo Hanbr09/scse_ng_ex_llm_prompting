@@ -109,7 +109,11 @@ class MatchingTests(unittest.TestCase):
         self.assertEqual(data["available_items"], self.available)
         self.assertEqual(self.available, before)
         self.assertNotIn('"F103"', user)
-        for rule in ("only", "JSON", "LOW", "MEDIUM", "HIGH", "all", "Not every detail"):
+        for rule in (
+            "only", "JSON", "LOW", "MEDIUM", "HIGH",
+            "Include every candidate", "Missing or different color, date",
+            "does NOT remove a same-type candidate", "All other object types are excluded",
+        ):
             self.assertIn(rule, system)
 
     def test_description_is_data_not_system_instructions(self):
@@ -328,13 +332,13 @@ class WorkflowTests(unittest.TestCase):
         self.assertFalse((other / "output").exists())
 
     def test_import_does_not_start_program_and_model_is_configurable(self):
-        environment = dict(os.environ, OLLAMA_MODEL="qwen2.5:7b")
+        environment = dict(os.environ, OLLAMA_MODEL="qwen2.5:3b")
         completed = subprocess.run(
             [sys.executable, "-B", "-c", "import investigate; print(investigate.MODEL)"],
             cwd=PROJECT, env=environment, text=True, capture_output=True, timeout=20,
         )
         self.assertEqual(completed.returncode, 0, completed.stderr)
-        self.assertEqual(completed.stdout.strip(), "qwen2.5:7b")
+        self.assertEqual(completed.stdout.strip(), "qwen2.5:3b")
 
 
 if __name__ == "__main__":

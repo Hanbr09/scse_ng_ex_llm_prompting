@@ -1,0 +1,19 @@
+CAMPUS LOST-AND-FOUND ASSISTANT
+==================================================
+
+Describe the item you lost:
+Searching for possible matches...
+
+MATCH RESULT
+--------------------------------------------------
+Confidence: HIGH
+
+Possible matches:
+
+ID: F101
+Item: backpack
+Color: black
+Location: Library 2nd floor
+Date found: 2026-09-15
+
+Result saved to output/match_result.json
